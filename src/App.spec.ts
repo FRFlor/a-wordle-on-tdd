@@ -25,12 +25,8 @@ describe("setting up the game", () => {
 
 describe("ending the game", () => {
     it("does not display game ending messages until the game is over", () => {
-        // Arrange: Instantiate the App
         const wrapper = mount(App, {props: {rightAnswer: "TESTS"}})
 
-        // Act: Don't do anything
-
-        // Assert: Verify that the winning/losing messages are not appearing
         expect(wrapper.find("[data-role=winning-message]").exists()).toBe(false)
         expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
     })
