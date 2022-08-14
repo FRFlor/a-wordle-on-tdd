@@ -3,7 +3,12 @@
 </template>
 
 <script lang="ts" setup>
-import {onMounted} from "vue"
+import {defineProps} from "vue"
 
-onMounted(() => console.warn("Invalid Prop 'rightAnswer' was given!"))
+defineProps({
+  rightAnswer: {
+    type: String,
+    validator: (wordGiven: string) => wordGiven.length === 5
+  }
+})
 </script>
