@@ -4,11 +4,12 @@
 
 <script lang="ts" setup>
 import {defineProps} from "vue"
+import {SETTINGS} from "@/configurations"
 
 defineProps({
   rightAnswer: {
     type: String,
-    validator: (wordGiven: string) => wordGiven.length === 5
+    validator: (wordGiven: string) => wordGiven.length === SETTINGS.wordSize
   }
 })
 </script>
