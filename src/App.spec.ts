@@ -31,7 +31,18 @@ describe("ending the game", () => {
         expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
     })
 
-    it.todo("displays a victory message when the player guesses the right word correctly")
+    it("displays a victory message when the player guesses the right word correctly", async () => {
+        // Arrange: Instantiate the App
+        const wrapper = mount(App, {props: {rightAnswer: "TESTS"}})
+
+        // Act: Type the correct guess and submit
+        await wrapper.find("[data-role=guess]").setValue("TESTS")
+        await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+
+        // Assert: Verify that the winning message is in display
+        expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
+    })
+
     it.todo("displays a failure message when the player guesses wrong")
 })
 
