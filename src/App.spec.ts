@@ -64,7 +64,15 @@ describe("Wordle", () => {
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
         })
 
-        it.todo("does not allow guesses that aren't real words")
+        it("does not allow guesses that aren't real words", async () => {
+            // Act: Type something that isn't really a word
+            await wrapper.find("[data-role=guess]").setValue("ASDFG")
+            await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+
+            // Assert: Verify that the losing message is not being rendered in the screen
+            expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
+        })
+
         test.todo("guesses are not case sensitive")
     })
 })
