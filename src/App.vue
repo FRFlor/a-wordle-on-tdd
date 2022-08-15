@@ -2,6 +2,12 @@
 import {defineProps, ref} from "vue"
 import {SETTINGS} from "@/configurations"
 
+enum GameState {
+  InProgress = "In-Progress",
+  Won = "Won",
+  Lost = "Lost"
+}
+
 const props = defineProps({
   rightAnswer: {
     type: String,
@@ -10,18 +16,18 @@ const props = defineProps({
 })
 
 const guess = ref<string>("")
-const hasWon = ref<boolean>(false)
-const hasLost = ref<boolean>(false)
+const gameState = ref<GameState>(GameState.InProgress)
 
 function submitAnswer() {
-  hasWon.value = guess.value === props.rightAnswer
-  hasLost.value = guess.value !== props.rightAnswer
+  gameState.value = guess.value === props.rightAnswer
+      ? GameState.Won
+      : GameState.Lost
 }
 </script>
 
 <template>
   <input v-model="guess" data-role="guess" type="text" @keydown.enter="submitAnswer">
 
-  <p v-if="hasWon" data-role="winning-message">You won!</p>
-  <p v-if="hasLost" data-role="losing-message">Better luck next time!</p>
+  <p v-if="gameState === GameState.Won" data-role="winning-message">You won!</p>
+  <p v-if="gameState === GameState.Lost" data-role="losing-message">Better luck next time!</p>
 </template>
