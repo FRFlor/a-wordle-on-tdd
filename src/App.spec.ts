@@ -116,6 +116,19 @@ describe("Wordle", () => {
             expect(document.activeElement).toBe(wrapper.find("[data-role=guess]").element)
         })
     })
+
+    describe("displaying hints", () => {
+        it("does not render results from guesses before an answer is submitted", async () => {
+            // Assert: Make sure the 'correct', 'incorrect' and 'almost' classes cannot be seen anywhere
+            expect(wrapper.find(".correct").exists()).toBe(false)
+            expect(wrapper.find(".incorrect").exists()).toBe(false)
+            expect(wrapper.find(".almost").exists()).toBe(false)
+        })
+
+        it.todo("marks letters that are in the correct position with the 'correct' class")
+        it.todo("marks letters that are not present in the word at all with the 'incorrect' class")
+        it.todo("marks letters that exist in the word but are not in the proper location with the 'almost' class")
+    })
 })
 
 function mountComponentAttachedToJsDomBody() {
