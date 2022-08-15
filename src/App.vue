@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import {defineProps, ref} from "vue"
 import {SETTINGS} from "@/settings"
+import GuessInput from "@/components/GuessInput.vue"
 
 enum GameState {
   InProgress = "In-Progress",
@@ -15,26 +16,18 @@ const props = defineProps({
   }
 })
 
-const guess = ref<string>("")
 const gameState = ref<GameState>(GameState.InProgress)
 
-function submitAnswer() {
-  if (!SETTINGS.allowedWords.includes(guess.value)) {
-    return
-  }
-
-  gameState.value = guess.value === props.rightAnswer
+function evaluateGuess(guess: string) {
+  gameState.value = guess === props.rightAnswer
       ? GameState.Won
       : GameState.Lost
 }
+
 </script>
 
 <template>
-  <input v-model="guess"
-         data-role="guess"
-         type="text"
-         @input="guess = guess.slice(0, SETTINGS.wordSize)"
-         @keydown.enter="submitAnswer">
+  <guess-input @guess-given="evaluateGuess"/>
 
   <p v-if="gameState === GameState.Won" data-role="winning-message">You won!</p>
   <p v-if="gameState === GameState.Lost" data-role="losing-message">Better luck next time!</p>
