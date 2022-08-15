@@ -26,7 +26,11 @@ function submitAnswer() {
 </script>
 
 <template>
-  <input v-model="guess" data-role="guess" type="text" @keydown.enter="submitAnswer">
+  <input v-model="guess"
+         data-role="guess"
+         type="text"
+         @input="guess = guess.slice(0, SETTINGS.wordSize)"
+         @keydown.enter="submitAnswer">
 
   <p v-if="gameState === GameState.Won" data-role="winning-message">You won!</p>
   <p v-if="gameState === GameState.Lost" data-role="losing-message">Better luck next time!</p>
