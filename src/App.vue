@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import {defineProps, ref} from "vue"
-import {SETTINGS} from "@/configurations"
-import AllowedWords from "@/allowedWords.json"
+import {SETTINGS} from "@/settings"
 
 enum GameState {
   InProgress = "In-Progress",
@@ -20,7 +19,7 @@ const guess = ref<string>("")
 const gameState = ref<GameState>(GameState.InProgress)
 
 function submitAnswer() {
-  if (!AllowedWords.includes(guess.value)) {
+  if (!SETTINGS.allowedWords.includes(guess.value)) {
     return
   }
 
