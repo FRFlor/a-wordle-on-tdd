@@ -42,15 +42,15 @@ describe("Wordle", () => {
             await wrapper.find("[data-role=guess]").trigger("keydown.enter")
 
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
+            expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
         })
 
         it("displays a failure message when the player guesses wrong", async () => {
-            // Act: Type an incorrect guess and submit
             await wrapper.find("[data-role=guess]").setValue("WRONG")
             await wrapper.find("[data-role=guess]").trigger("keydown.enter")
 
-            // Assert: Verify that the failure message is in display
             expect(wrapper.find("[data-role=losing-message]").exists()).toBe(true)
+            expect(wrapper.find("[data-role=winning-message]").exists()).toBe(false)
         })
     })
 })
