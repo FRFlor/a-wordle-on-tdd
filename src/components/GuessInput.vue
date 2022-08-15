@@ -1,8 +1,9 @@
 <script lang="ts" setup>
-import {defineEmits, ref} from "vue"
+import {defineEmits, onMounted, ref} from "vue"
 import {SETTINGS} from "@/settings"
 
 const guess = ref<string>("")
+const input = ref<HTMLInputElement>()
 const emit = defineEmits(["guessGiven"])
 
 function submitAnswerIfWordExists() {
@@ -11,10 +12,14 @@ function submitAnswerIfWordExists() {
   }
 }
 
+onMounted(() => {
+  input.value?.focus()
+})
 </script>
 
 <template>
   <input v-model="guess"
+         ref="input"
          data-role="guess"
          type="text"
          @input="guess = guess.slice(0, SETTINGS.wordSize).toUpperCase()"

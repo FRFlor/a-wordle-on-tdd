@@ -1,12 +1,14 @@
-import {mount, VueWrapper} from "@vue/test-utils"
+import {mount, MountingOptions, VueWrapper} from "@vue/test-utils"
 import App from "@/App.vue"
 
 const rightAnswer = "TESTS"
+
 describe("Wordle", () => {
     let wrapper: VueWrapper
 
     beforeEach(() => {
-        wrapper = mount(App, {props: {rightAnswer}})
+        document.body.innerHTML = "<div id=\"app\"></div>"
+        wrapper = mount(App, {props: {rightAnswer}, attachTo: document.getElementById("app")} as MountingOptions<any>)
     })
 
     describe("setting up the game", () => {
@@ -98,6 +100,17 @@ describe("Wordle", () => {
             await wrapper.find("[data-role=guess]").trigger("keydown.enter")
 
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
+        })
+
+        it("starts with focus", async () => {
+            document.body.innerHTML = "<div id=\"app\"></div>"
+            wrapper = mount(App, {
+                    props: {rightAnswer},
+                    attachTo: document.getElementById("app")
+                } as MountingOptions<any>
+            )
+
+            expect(document.activeElement).toBe(wrapper.find("[data-role=guess]").element)
         })
     })
 })
