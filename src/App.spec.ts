@@ -119,7 +119,6 @@ describe("Wordle", () => {
 
     describe("displaying hints", () => {
         it("does not render results from guesses before an answer is submitted", async () => {
-            // Assert: Make sure the 'correct', 'incorrect' and 'almost' classes cannot be seen anywhere
             expect(wrapper.find(".correct").exists()).toBe(false)
             expect(wrapper.find(".incorrect").exists()).toBe(false)
             expect(wrapper.find(".almost").exists()).toBe(false)
