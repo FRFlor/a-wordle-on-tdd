@@ -56,14 +56,11 @@ describe("Wordle", () => {
 
     describe("player input", () => {
         it("does not allow guesses longer than 5 letters", async () => {
-            // Arrange: Instantiate the App
             wrapper = mount(App, {props: {rightAnswer: "ACTOR"}})
 
-            // Act: Type a guess that is longer than 5 letters but that would be correct with just the first 5 characters
             await wrapper.find("[data-role=guess]").setValue("ACTORS")
             await wrapper.find("[data-role=guess]").trigger("keydown.enter")
 
-            // Assert: confirm that winning game message was displayed
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
         })
 
