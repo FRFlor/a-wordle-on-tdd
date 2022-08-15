@@ -25,7 +25,29 @@ describe("Wordle", () => {
                 hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
             })
 
-            mount(App, {props: {rightAnswer: "SomethingLargerThan5"}})
+            mount(App, {props: {rightAnswer: "SOMETHING_LARGER_THAN_5_CHARACTERS"}})
+
+            expect(hasWarnedAboutWordProp).toBe(true)
+        })
+
+        it("provides a warning if the rightAnswer given is not in allowed words", () => {
+            let hasWarnedAboutWordProp = false
+            console.warn = jest.fn().mockImplementation((vueWarning) => {
+                hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
+            })
+
+            mount(App, {props: {rightAnswer: "ASDFG"}})
+
+            expect(hasWarnedAboutWordProp).toBe(true)
+        })
+
+        it("provides a warning if the rightAnswer given is not in uppercase", () => {
+            let hasWarnedAboutWordProp = false
+            console.warn = jest.fn().mockImplementation((vueWarning) => {
+                hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
+            })
+
+            mount(App, {props: {rightAnswer: "tests"}})
 
             expect(hasWarnedAboutWordProp).toBe(true)
         })

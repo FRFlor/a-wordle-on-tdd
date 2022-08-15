@@ -12,7 +12,9 @@ enum GameState {
 const props = defineProps({
   rightAnswer: {
     type: String,
-    validator: (wordGiven: string) => wordGiven.length === SETTINGS.wordSize
+    validator: (wordGiven: string) =>
+        wordGiven.length === SETTINGS.wordSize
+        && SETTINGS.allowedWords.includes(wordGiven)
   }
 })
 
