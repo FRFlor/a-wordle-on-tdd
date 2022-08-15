@@ -71,7 +71,12 @@ describe("Wordle", () => {
             expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
         })
 
-        test.todo("guesses are not case sensitive")
+        test("guesses are not case sensitive", async () => {
+            await wrapper.find("[data-role=guess]").setValue(rightAnswer.toLowerCase())
+            await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+
+            expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
+        })
     })
 })
 

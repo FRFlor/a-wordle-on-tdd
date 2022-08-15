@@ -17,6 +17,6 @@ function submitAnswerIfWordExists() {
   <input v-model="guess"
          data-role="guess"
          type="text"
-         @input="guess = guess.slice(0, SETTINGS.wordSize)"
+         @input="guess = guess.slice(0, SETTINGS.wordSize).toUpperCase()"
          @keydown.enter="submitAnswerIfWordExists">
 </template>
