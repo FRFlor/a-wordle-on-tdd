@@ -7,15 +7,14 @@ describe("Wordle", () => {
     let wrapper: VueWrapper
 
     beforeEach(() => {
-        document.body.innerHTML = "<div id=\"app\"></div>"
-        wrapper = mount(App, {props: {rightAnswer}, attachTo: document.getElementById("app")} as MountingOptions<any>)
+        wrapper = mountApp(rightAnswer)
     })
 
     describe("setting up the game", () => {
         it("accepts a 'rightAnswer' with 5 letters without giving any warnings", () => {
             console.warn = jest.fn()
 
-            const wrapper = mount(App, {props: {rightAnswer}})
+            const wrapper = mountApp(rightAnswer)
 
             expect(wrapper.vm).toBeTruthy()
             expect(console.warn).not.toHaveBeenCalled()
@@ -27,7 +26,7 @@ describe("Wordle", () => {
                 hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
             })
 
-            mount(App, {props: {rightAnswer: "SOMETHING_LARGER_THAN_5_CHARACTERS"}})
+            mountApp("SOMETHING_LARGER_THAN_5_CHARACTERS")
 
             expect(hasWarnedAboutWordProp).toBe(true)
         })
@@ -38,7 +37,7 @@ describe("Wordle", () => {
                 hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
             })
 
-            mount(App, {props: {rightAnswer: "ASDFG"}})
+            mountApp("ASDFG")
 
             expect(hasWarnedAboutWordProp).toBe(true)
         })
@@ -49,7 +48,7 @@ describe("Wordle", () => {
                 hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
             })
 
-            mount(App, {props: {rightAnswer: "tests"}})
+            mountApp("tests")
 
             expect(hasWarnedAboutWordProp).toBe(true)
         })
@@ -80,7 +79,7 @@ describe("Wordle", () => {
 
     describe("player input", () => {
         it("does not allow guesses longer than 5 letters", async () => {
-            wrapper = mount(App, {props: {rightAnswer: "ACTOR"}})
+            wrapper = mountApp("ACTOR")
 
             await wrapper.find("[data-role=guess]").setValue("ACTORS")
             await wrapper.find("[data-role=guess]").trigger("keydown.enter")
@@ -103,13 +102,13 @@ describe("Wordle", () => {
         })
 
         it("starts with focus", async () => {
-            wrapper = mountComponentAttachedToJsDomBody()
+            wrapper = mountApp(rightAnswer)
 
             expect(document.activeElement).toBe(wrapper.find("[data-role=guess]").element)
         })
 
         it("never loses focus", async () => {
-            wrapper = mountComponentAttachedToJsDomBody()
+            wrapper = mountApp(rightAnswer)
 
             await wrapper.find("[data-role=guess]").trigger("blur")
 
@@ -130,7 +129,7 @@ describe("Wordle", () => {
     })
 })
 
-function mountComponentAttachedToJsDomBody() {
+function mountApp(rightAnswer: string): VueWrapper {
     document.body.innerHTML = "<div id=\"app\"></div>"
     return mount(App, {
             props: {rightAnswer},
