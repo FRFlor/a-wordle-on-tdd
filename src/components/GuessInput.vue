@@ -23,5 +23,6 @@ onMounted(() => {
          data-role="guess"
          type="text"
          @input="guess = guess.slice(0, SETTINGS.wordSize).toUpperCase()"
+         @blur="input.focus()"
          @keydown.enter="submitAnswerIfWordExists">
 </template>

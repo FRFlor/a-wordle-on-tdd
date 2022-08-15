@@ -103,15 +103,26 @@ describe("Wordle", () => {
         })
 
         it("starts with focus", async () => {
-            document.body.innerHTML = "<div id=\"app\"></div>"
-            wrapper = mount(App, {
-                    props: {rightAnswer},
-                    attachTo: document.getElementById("app")
-                } as MountingOptions<any>
-            )
+            wrapper = mountComponentAttachedToJsDomBody()
+
+            expect(document.activeElement).toBe(wrapper.find("[data-role=guess]").element)
+        })
+
+        it("never loses focus", async () => {
+            wrapper = mountComponentAttachedToJsDomBody()
+
+            await wrapper.find("[data-role=guess]").trigger("blur")
 
             expect(document.activeElement).toBe(wrapper.find("[data-role=guess]").element)
         })
     })
 })
 
+function mountComponentAttachedToJsDomBody() {
+    document.body.innerHTML = "<div id=\"app\"></div>"
+    return mount(App, {
+            props: {rightAnswer},
+            attachTo: document.getElementById("app")
+        } as MountingOptions<any>
+    )
+}
