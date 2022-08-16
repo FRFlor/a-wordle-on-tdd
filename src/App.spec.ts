@@ -5,11 +5,6 @@ const rightAnswer = "TESTS"
 
 let wrapper: VueWrapper
 
-async function playerGuesses(guess: string) {
-    await wrapper.find("[data-role=guess]").setValue(guess)
-    await wrapper.find("[data-role=guess]").trigger("keydown.enter")
-}
-
 describe("Wordle", () => {
     beforeEach(() => {
         mountApp(rightAnswer)
@@ -106,14 +101,10 @@ describe("Wordle", () => {
         })
 
         it("starts with focus", async () => {
-            mountApp(rightAnswer)
-
             expect(document.activeElement).toBe(wrapper.find("[data-role=guess]").element)
         })
 
         it("never loses focus", async () => {
-            mountApp(rightAnswer)
-
             await wrapper.find("[data-role=guess]").trigger("blur")
 
             expect(document.activeElement).toBe(wrapper.find("[data-role=guess]").element)
@@ -140,4 +131,9 @@ function mountApp(rightAnswer: string): void {
             attachTo: document.getElementById("app")
         } as MountingOptions<any>
     )
+}
+
+async function playerGuesses(guess: string): Promise<void> {
+    await wrapper.find("[data-role=guess]").setValue(guess)
+    await wrapper.find("[data-role=guess]").trigger("keydown.enter")
 }
