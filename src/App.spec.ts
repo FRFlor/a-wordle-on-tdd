@@ -122,8 +122,6 @@ describe("Wordle", () => {
 
     describe("displaying hints", () => {
         it("renders all allowed attempts as empty blocks since the start", async () => {
-            // Assert: Ensure that we have 6 blocks to show past guesses
-            // Assert: Ensure that each of those blocks have 5 letter slots in them
             expect(wrapper.findAll("[data-role=past-guess]")).toHaveLength(SETTINGS.numberOfAttemptsAllowed)
 
             wrapper.findAll("[data-role=past-guess]").forEach((pastGuess) => {
@@ -133,14 +131,12 @@ describe("Wordle", () => {
         })
 
         it("displays all previous guesses", async () => {
-            // Act: Have the player take multiple guesses
             const guesses = ["TRIAL", "TEMPO", "GREAT", "WRONG", "BYTES", "TESTS"]
 
             for (const guess of guesses) {
                 await playerGuesses(guess)
             }
 
-            // Assert: Ensure that each of those guesses are showing up in the past guesses
             const pastGuesses = wrapper.findAll("[data-role=past-guess]")
 
             expect(pastGuesses).toHaveLength(SETTINGS.numberOfAttemptsAllowed)
