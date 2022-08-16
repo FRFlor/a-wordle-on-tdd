@@ -115,15 +115,11 @@ describe("Wordle", () => {
         })
 
         it("marks letters that are in the correct position with the 'correct' class", async () => {
-            // Arrange: Instantiate the App
             mountApp("WORDS")
 
-            // Act: Have a guess that has some correct letters
             await playerGuesses("WORLD")
 
-            // Assert: Ensure that those correct letters have the 'correct' class given to them
             const pastGuess = wrapper.find("[data-role=past-guess]")
-
             expect(pastGuess.find("[data-letter=W]").classes("correct")).toBe(true)
             expect(pastGuess.find("[data-letter=O]").classes("correct")).toBe(true)
             expect(pastGuess.find("[data-letter=R]").classes("correct")).toBe(true)
