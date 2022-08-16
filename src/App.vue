@@ -32,7 +32,7 @@ function evaluateGuess(guess: string) {
     return
   }
 
-  if (numberOfAttempts.value === 6) {
+  if (numberOfAttempts.value >= SETTINGS.numberOfAttemptsAllowed) {
     gameState.value = GameState.Lost
   }
 }

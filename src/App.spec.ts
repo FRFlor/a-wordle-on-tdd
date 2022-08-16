@@ -1,5 +1,6 @@
 import {mount, MountingOptions, VueWrapper} from "@vue/test-utils"
 import App from "@/App.vue"
+import {SETTINGS} from "@/settings"
 
 const rightAnswer = "TESTS"
 
@@ -68,7 +69,7 @@ describe("Wordle", () => {
         })
 
         it("only fails the game if the player has guessed wrong 6 times in a roll", async () => {
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < SETTINGS.numberOfAttemptsAllowed - 1; i++) {
                 await playerGuesses("WRONG")
             }
 
