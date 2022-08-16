@@ -4,12 +4,14 @@ import {SETTINGS} from "@/settings"
 
 const guess = ref<string>("")
 const input = ref<HTMLInputElement>()
-const emit = defineEmits(["guessGiven"])
+const emit = defineEmits(["guessGiven", "guessUpdated"])
 
 function submitAnswerIfWordExists() {
   if (SETTINGS.allowedWords.includes(guess.value)) {
-    emit("guessGiven", guess.value)
+    emit("guessGiven")
+
     guess.value = ""
+    emit("guessUpdated", guess.value)
   }
 }
 
@@ -22,6 +24,8 @@ function sanitizeInput() {
   const limitLength = (word: string) => word.slice(0, SETTINGS.wordSize)
 
   guess.value = limitLength(inputWithJustLetters)
+
+  emit("guessUpdated", guess.value)
 }
 
 onMounted(() => {

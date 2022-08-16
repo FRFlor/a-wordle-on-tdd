@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import {defineProps} from "vue"
+import {computed, defineProps} from "vue"
+import {SETTINGS} from "@/settings"
 
 const props = defineProps({
   guess: {
@@ -10,6 +11,10 @@ const props = defineProps({
     type: String,
     required: true
   }
+})
+
+const lettersToRender = computed(() => {
+  return props.guess.trim().length === 0 ? " ".repeat(SETTINGS.wordSize) : props.guess
 })
 
 function getHintClassForLetter(letter: string, letterPosition: number): string {
@@ -34,7 +39,7 @@ function getHintClassForLetter(letter: string, letterPosition: number): string {
 
 <template>
   <ul data-role="guess-view">
-    <li v-for="(letter, letterPosition) in props.guess"
+    <li v-for="(letter, letterPosition) in lettersToRender"
         :key="letterPosition"
         :class="getHintClassForLetter(letter, letterPosition)"
         data-role="letter"

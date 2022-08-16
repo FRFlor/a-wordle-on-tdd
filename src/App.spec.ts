@@ -124,6 +124,25 @@ describe("Wordle", () => {
 
             expect(getWhatPlayerInputShows()).toEqual("AB")
         })
+
+        it("Displays the current guess being typed at the current attempt view", async () => {
+            // Act: Start typing a guess
+            await playerGuesses("BY")
+
+            // Assert: See that this guess is showing up on the first guest view
+            const topGuessView = wrapper.findAll("[data-role=guess-view]")[0]
+            expect(topGuessView.text()).toEqual("BY")
+
+            // Act: Submit that guess
+            await playerGuesses("BYTES")
+
+            // Act: Start typing another guess
+            await playerGuesses("TRI")
+
+            // Assert: See that this guess is showing up on the second guest view
+            const secondGuessView = wrapper.findAll("[data-role=guess-view]")[1]
+            expect(secondGuessView.text()).toEqual("TRI")
+        })
     })
 
     describe("displaying hints", () => {

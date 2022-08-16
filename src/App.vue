@@ -26,13 +26,18 @@ function initializePastGuesses(): string[] {
 }
 
 const pastGuesses = ref<string[]>(initializePastGuesses())
+const guessInProgress = ref<string>("")
 const numberOfAttempts = ref<number>(0)
 
-function evaluateGuess(guess: string) {
-  pastGuesses.value[numberOfAttempts.value] = guess
+function updateGuessInProgress(newValue: string) {
+  guessInProgress.value = newValue
+}
+
+function evaluateGuess() {
+  pastGuesses.value[numberOfAttempts.value] = guessInProgress.value
   numberOfAttempts.value++
 
-  if (guess === props.rightAnswer) {
+  if (guessInProgress.value === props.rightAnswer) {
     gameState.value = GameState.Won
     return
   }
@@ -47,10 +52,10 @@ function evaluateGuess(guess: string) {
 <template>
   <guess-view v-for="(pastGuess, index) in pastGuesses"
               :key="index"
-              :guess="pastGuess"
+              :guess="index === numberOfAttempts ? guessInProgress : pastGuess"
               :right-answer="props.rightAnswer"/>
 
-  <guess-input @guess-given="evaluateGuess"/>
+  <guess-input @guess-given="evaluateGuess" @guess-updated="updateGuessInProgress"/>
 
   <p v-if="gameState === GameState.Won" data-role="winning-message">You won!</p>
   <p v-if="gameState === GameState.Lost" data-role="losing-message">Better luck next time!</p>
