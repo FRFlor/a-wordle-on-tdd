@@ -15,7 +15,7 @@ function submitAnswerIfWordExists() {
   }
 }
 
-function sanitizeInput() {
+function sanitizeGuess() {
   const rawInput = guess.value.toUpperCase()
 
   const onlyAllowLetters = (word: string) => word.replaceAll(/[^a-z]/gi, "")
@@ -38,7 +38,7 @@ onMounted(() => {
          ref="input"
          data-role="guess"
          type="text"
-         @input="sanitizeInput"
+         @input="sanitizeGuess"
          @blur="input.focus()"
          @keydown.enter="submitAnswerIfWordExists">
 </template>
