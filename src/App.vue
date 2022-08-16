@@ -45,3 +45,23 @@ function evaluateGuess(guess: string) {
   <p v-if="gameState === GameState.Won" data-role="winning-message">You won!</p>
   <p v-if="gameState === GameState.Lost" data-role="losing-message">Better luck next time!</p>
 </template>
+
+<style>
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+[data-role=past-guess] {
+  display: flex
+}
+
+[data-role=past-guess] li {
+  font-size: 2rem;
+}
+
+.correct {
+  background-color: hsl(120, 40%, 65%);
+  color: hsl(0, 0%, 95%);
+}
+</style>
