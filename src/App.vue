@@ -45,6 +45,9 @@ function evaluateGuess() {
 </script>
 
 <template>
+  <h1>Worlde</h1>
+  <p class="on-tdd">on TDD</p>
+
   <guess-view v-for="(pastGuess, index) in pastGuesses"
               :key="index"
               :guess="index === numberOfAttempts ? guessInProgress : pastGuess"
@@ -67,7 +70,23 @@ $baseColour: hsl(0, 0%, 100%);
 body {
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 0.65rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.on-tdd {
+  text-align: center;
+  margin-top: -1.5rem;
+  margin-left: 6rem;
+  margin-bottom: 2rem;
+}
+
+[data-role=winning-message], [data-role=losing-message] {
+  font-size: 1.5rem;
+  transform: rotateZ(25deg) translateY(5rem) translateX(-3rem);
 }
 
 ul {
