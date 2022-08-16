@@ -48,6 +48,7 @@ function evaluateGuess() {
   <guess-view v-for="(pastGuess, index) in pastGuesses"
               :key="index"
               :guess="index === numberOfAttempts ? guessInProgress : pastGuess"
+              :class="{'perfect': pastGuess === rightAnswer}"
               :show-hints="index !== numberOfAttempts"
               :right-answer="props.rightAnswer"/>
 
@@ -88,6 +89,49 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@for $i from 1 through 5 {
+  .perfect [data-role=letter].correct:nth-of-type(#{$i}) {
+    animation: winning-reveal 2s forwards;
+    animation-delay: #{250*$i}ms;
+  }
+}
+
+@keyframes winning-reveal {
+  0% {
+    transform: rotateY(0) translateY(0);
+    background-color: $baseColour;
+  }
+
+  9% {
+    background-color: $baseColour;
+  }
+  10% {
+    transform: rotateY(-90deg);
+    background-color: $correctColour;
+    color: hsl(0, 0%, 95%);
+  }
+
+  20% {
+    transform: rotateY(0) translateY(0);
+    background-color: $correctColour;
+    color: hsl(0, 0%, 95%);
+  }
+
+  60% {
+    transform: translateY(0)
+  }
+
+  50% {
+    transform: translateY(-3rem)
+  }
+
+  100% {
+    transform: translateY(0);
+    background-color: $correctColour;
+    color: hsl(0, 0%, 95%);
+  }
 }
 
 $situations: 'incorrect', 'correct', 'almost';

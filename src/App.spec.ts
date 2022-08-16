@@ -236,6 +236,12 @@ describe("Wordle", () => {
 
                 expect(pastGuess.find("[data-letter=D]").classes("almost")).toBe(true)
             })
+
+        it("marks the winning guess with the 'perfect' class", async () => {
+            await playerGuesses(rightAnswer)
+
+            expect(wrapper.find("[data-role=guess-view]").classes("perfect")).toBe(true)
+        })
     })
 })
 

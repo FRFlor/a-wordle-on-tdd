@@ -38,7 +38,6 @@ function getHintClassForLetter(letter: string, letterPosition: number): string {
 
   return "incorrect"
 }
-
 </script>
 
 <template>
