@@ -68,8 +68,7 @@ describe("Wordle", () => {
         })
 
         it("displays a failure message when the player guesses wrong", async () => {
-            await wrapper.find("[data-role=guess]").setValue("WRONG")
-            await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+            await playerGuesses("WRONG")
 
             expect(wrapper.find("[data-role=losing-message]").exists()).toBe(true)
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(false)
@@ -80,22 +79,19 @@ describe("Wordle", () => {
         it("does not allow guesses longer than 5 letters", async () => {
             mountApp("ACTOR")
 
-            await wrapper.find("[data-role=guess]").setValue("ACTORS")
-            await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+            await playerGuesses("ACTORS")
 
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
         })
 
         it("does not allow guesses that aren't real words", async () => {
-            await wrapper.find("[data-role=guess]").setValue("ASDFG")
-            await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+            await playerGuesses("ASDFG")
 
             expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
         })
 
         test("guesses are not case sensitive", async () => {
-            await wrapper.find("[data-role=guess]").setValue(rightAnswer.toLowerCase())
-            await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+            await playerGuesses(rightAnswer.toLowerCase())
 
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
         })
