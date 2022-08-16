@@ -61,6 +61,7 @@ function evaluateGuess() {
 $incorrectColour: hsl(120, 0%, 65%);
 $correctColour: hsl(120, 40%, 65%);
 $almostColour: hsl(41, 100%, 48%);
+$baseColour: hsl(0, 0%, 100%);
 
 body {
   display: flex;
@@ -80,7 +81,7 @@ ul {
 }
 
 [data-role=letter] {
-  background-color: white;
+  background-color: $baseColour;
   border: 1px solid hsl(0, 0%, 30%);
   width: 3rem;
   height: 3rem;
@@ -89,18 +90,43 @@ ul {
   align-items: center;
 }
 
-.correct {
-  background-color: $correctColour;
-  color: hsl(0, 0%, 95%);
-}
+$situations: 'incorrect', 'correct', 'almost';
+@each $situation in $situations {
+  $highlightColour: $correctColour;
+  @if $situation == 'incorrect' {
+    $highlightColour: $incorrectColour
+  }
+  @if $situation == 'almost' {
+    $highlightColour: $almostColour
+  }
 
-.incorrect {
-  background-color: $incorrectColour;
-  color: hsl(0, 0%, 95%);
-}
+  @keyframes reveal-#{$situation} {
+    0% {
+      transform: rotateY(0);
+      background-color: $baseColour;
+    }
 
-.almost {
-  background-color: $almostColour;
-  color: hsl(0, 0%, 95%);
+    49% {
+      background-color: $baseColour;
+    }
+    50% {
+      transform: rotateY(-90deg);
+      background-color: $highlightColour;
+      color: hsl(0, 0%, 95%);
+    }
+
+    100% {
+      transform: rotateY(0);
+      background-color: $highlightColour;
+      color: hsl(0, 0%, 95%);
+    }
+  }
+
+  @for $i from 1 through 5 {
+    [data-role=letter].#{$situation}:nth-of-type(#{$i}) {
+      animation: reveal-#{$situation} 500ms forwards;
+      animation-delay: #{250*$i}ms;
+    }
+  }
 }
 </style>
