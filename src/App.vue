@@ -2,6 +2,7 @@
 import {defineProps, ref} from "vue"
 import {SETTINGS} from "@/settings"
 import GuessInput from "@/components/GuessInput.vue"
+import GuessView from "@/components/GuessView.vue"
 
 enum GameState {
   InProgress = "In-Progress",
@@ -40,17 +41,7 @@ function evaluateGuess(guess: string) {
 </script>
 
 <template>
-  <ul data-role="past-guess">
-    <li v-for="(letter, index) in pastGuess"
-        :key="index"
-        :class="{
-          'correct': letter === rightAnswer[index],
-          'incorrect': letter !== rightAnswer[index] && !rightAnswer.includes(letter),
-          'almost': letter !== rightAnswer[index] && rightAnswer.includes(letter)
-        }"
-        :data-letter="letter">{{ letter }}
-    </li>
-  </ul>
+  <guess-view :guess="pastGuess" :right-answer="props.rightAnswer"/>
 
   <guess-input @guess-given="evaluateGuess"/>
 
