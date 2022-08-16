@@ -12,18 +12,29 @@ const props = defineProps({
   }
 })
 
+function getHintClassForLetter(letter: string, letterPosition: number): string {
+  const expectedLetter = props.rightAnswer[letterPosition]
+
+  if (letter === expectedLetter) {
+    return "correct"
+  }
+
+  if (props.rightAnswer.includes(letter)) {
+    return "almost"
+  }
+
+  return "incorrect"
+}
+
 </script>
 
 <template>
   <ul data-role="past-guess">
-    <li v-for="(letter, index) in props.guess"
-        :key="index"
-        :class="{
-          'correct': letter === props.rightAnswer[index],
-          'incorrect': letter !== props.rightAnswer[index] && !props.rightAnswer.includes(letter),
-          'almost': letter !== props.rightAnswer[index] && props.rightAnswer.includes(letter)
-        }"
-        :data-letter="letter">{{ letter }}
+    <li v-for="(letter, letterPosition) in props.guess"
+        :key="letterPosition"
+        :class="getHintClassForLetter(letter, letterPosition)"
+        :data-letter="letter">
+      {{ letter }}
     </li>
   </ul>
 </template>
