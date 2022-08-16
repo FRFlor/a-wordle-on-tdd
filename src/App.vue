@@ -57,7 +57,12 @@ function evaluateGuess() {
   <p v-if="gameState === GameState.Lost" data-role="losing-message">Better luck next time!</p>
 </template>
 
-<style>
+<style lang="scss">
+$incorrectColour: hsl(120, 0%, 65%);
+$correctColour: hsl(120, 40%, 65%);
+$almostColour: hsl(41, 100%, 48%);
+
+
 ul {
   list-style: none;
   padding: 0;
@@ -80,17 +85,17 @@ ul {
 }
 
 .correct {
-  background-color: hsl(120, 40%, 65%);
+  background-color: $correctColour;
   color: hsl(0, 0%, 95%);
 }
 
 .incorrect {
-  background-color: hsl(120, 0%, 65%);
+  background-color: $incorrectColour;
   color: hsl(0, 0%, 95%);
 }
 
 .almost {
-  background-color: hsl(41, 100%, 48%);
+  background-color: $almostColour;
   color: hsl(0, 0%, 95%);
 }
 </style>

@@ -42,3 +42,10 @@ onMounted(() => {
          @blur="input.focus()"
          @keydown.enter="submitAnswerIfWordExists">
 </template>
+
+<style scoped>
+input {
+  position: absolute;
+  transform: scale(0);
+}
+</style>
