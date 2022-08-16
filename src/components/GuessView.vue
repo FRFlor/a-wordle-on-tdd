@@ -10,6 +10,10 @@ const props = defineProps({
   rightAnswer: {
     type: String,
     required: true
+  },
+  showHints: {
+    type: Boolean,
+    required: true
   }
 })
 
@@ -18,7 +22,7 @@ const lettersToRender = computed(() => {
 })
 
 function getHintClassForLetter(letter: string, letterPosition: number): string {
-  if (letter === " ") {
+  if (letter === " " || !props.showHints) {
     return ""
   }
 

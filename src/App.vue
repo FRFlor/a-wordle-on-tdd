@@ -48,6 +48,7 @@ function evaluateGuess() {
   <guess-view v-for="(pastGuess, index) in pastGuesses"
               :key="index"
               :guess="index === numberOfAttempts ? guessInProgress : pastGuess"
+              :show-hints="index !== numberOfAttempts"
               :right-answer="props.rightAnswer"/>
 
   <guess-input @guess-given="evaluateGuess" @guess-updated="updateGuessInProgress"/>

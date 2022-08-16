@@ -168,9 +168,16 @@ describe("Wordle", () => {
         })
 
         it("does not render results from guesses before an answer is submitted", async () => {
-            expect(wrapper.find(".correct").exists()).toBe(false)
-            expect(wrapper.find(".incorrect").exists()).toBe(false)
-            expect(wrapper.find(".almost").exists()).toBe(false)
+            const guess = "GREAT"
+
+            for (let numberOfCharactersTyped = 0; numberOfCharactersTyped < guess.length - 1; numberOfCharactersTyped++) {
+                const inProgressGuess = guess.slice(0, numberOfCharactersTyped)
+                await playerGuesses(inProgressGuess)
+
+                expect(wrapper.find(".correct").exists()).toBe(false)
+                expect(wrapper.find(".incorrect").exists()).toBe(false)
+                expect(wrapper.find(".almost").exists()).toBe(false)
+            }
         })
 
         it("marks letters that are in the correct position with the 'correct' class", async () => {
