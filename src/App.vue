@@ -35,7 +35,10 @@ function evaluateGuess(guess: string) {
   <ul data-role="past-guess">
     <li v-for="(letter, index) in pastGuess"
         :key="index"
-        :class="{'correct': letter === rightAnswer[index]}"
+        :class="{
+          'correct': letter === rightAnswer[index],
+          'incorrect': letter !== rightAnswer[index] && !rightAnswer.includes(letter),
+        }"
         :data-letter="letter">{{ letter }}
     </li>
   </ul>

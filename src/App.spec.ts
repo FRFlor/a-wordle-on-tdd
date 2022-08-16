@@ -128,7 +128,21 @@ describe("Wordle", () => {
             expect(pastGuess.find("[data-letter=D]").classes("correct")).toBe(false)
         })
 
-        it.todo("marks letters that are not present in the word at all with the 'incorrect' class")
+        it("marks letters that are not present in the word at all with the 'incorrect' class", async () => {
+            mountApp("WORDS")
+
+            await playerGuesses("WORLD")
+
+            const pastGuess = wrapper.find("[data-role=past-guess]")
+            expect(pastGuess.find("[data-letter=W]").classes("incorrect")).toBe(false)
+            expect(pastGuess.find("[data-letter=O]").classes("incorrect")).toBe(false)
+            expect(pastGuess.find("[data-letter=R]").classes("incorrect")).toBe(false)
+
+            expect(pastGuess.find("[data-letter=L]").classes("incorrect")).toBe(true)
+
+            expect(pastGuess.find("[data-letter=D]").classes("incorrect")).toBe(false)
+        })
+
         it.todo("marks letters that exist in the word but are not in the proper location with the 'almost' class")
     })
 })
