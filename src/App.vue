@@ -21,11 +21,7 @@ const props = defineProps({
 
 const gameState = ref<GameState>(GameState.InProgress)
 
-function initializePastGuesses(): string[] {
-  return Array.from({length: SETTINGS.numberOfAttemptsAllowed}, () => " ".repeat(SETTINGS.wordSize))
-}
-
-const pastGuesses = ref<string[]>(initializePastGuesses())
+const pastGuesses = ref<string[]>(Array.from({length: SETTINGS.numberOfAttemptsAllowed}, () => ""))
 const guessInProgress = ref<string>("")
 const numberOfAttempts = ref<number>(0)
 
