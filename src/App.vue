@@ -126,6 +126,7 @@ ul {
   9% {
     background-color: $baseColour;
   }
+
   10% {
     transform: rotateY(-90deg);
     background-color: $correctColour;
