@@ -73,4 +73,9 @@ ul {
   background-color: hsl(120, 0%, 65%);
   color: hsl(0, 0%, 95%);
 }
+
+.almost {
+  background-color: hsl(41, 100%, 48%);
+  color: hsl(0, 0%, 95%);
+}
 </style>
