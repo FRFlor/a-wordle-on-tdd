@@ -114,7 +114,24 @@ describe("Wordle", () => {
             expect(wrapper.find(".almost").exists()).toBe(false)
         })
 
-        it.todo("marks letters that are in the correct position with the 'correct' class")
+        it("marks letters that are in the correct position with the 'correct' class", async () => {
+            // Arrange: Instantiate the App
+            mountApp("WORDS")
+
+            // Act: Have a guess that has some correct letters
+            await playerGuesses("WORLD")
+
+            // Assert: Ensure that those correct letters have the 'correct' class given to them
+            const pastGuess = wrapper.find("[data-role=past-guess]")
+
+            expect(pastGuess.find("[data-letter=W]").classes("correct")).toBe(true)
+            expect(pastGuess.find("[data-letter=O]").classes("correct")).toBe(true)
+            expect(pastGuess.find("[data-letter=R]").classes("correct")).toBe(true)
+
+            expect(pastGuess.find("[data-letter=L]").classes("correct")).toBe(false)
+            expect(pastGuess.find("[data-letter=D]").classes("correct")).toBe(false)
+        })
+
         it.todo("marks letters that are not present in the word at all with the 'incorrect' class")
         it.todo("marks letters that exist in the word but are not in the proper location with the 'almost' class")
     })

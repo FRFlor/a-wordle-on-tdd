@@ -19,8 +19,11 @@ const props = defineProps({
 })
 
 const gameState = ref<GameState>(GameState.InProgress)
+const pastGuess = ref<string>("")
 
 function evaluateGuess(guess: string) {
+  pastGuess.value = guess
+
   gameState.value = guess === props.rightAnswer
       ? GameState.Won
       : GameState.Lost
@@ -29,6 +32,14 @@ function evaluateGuess(guess: string) {
 </script>
 
 <template>
+  <ul data-role="past-guess">
+    <li v-for="(letter, index) in pastGuess"
+        :key="index"
+        :class="{'correct': letter === rightAnswer[index]}"
+        :data-letter="letter">{{ letter }}
+    </li>
+  </ul>
+
   <guess-input @guess-given="evaluateGuess"/>
 
   <p v-if="gameState === GameState.Won" data-role="winning-message">You won!</p>
