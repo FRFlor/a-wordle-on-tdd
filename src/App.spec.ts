@@ -116,7 +116,7 @@ describe("Wordle", () => {
         it("clears the input after each attempt", async () => {
             await playerGuesses("WRONG")
 
-            expect(wrapper.find<HTMLInputElement>("[data-role=guess]").element.value).toEqual("")
+            expect(getWhatPlayerInputShows()).toEqual("")
         })
     })
 
@@ -211,6 +211,10 @@ function mountApp(rightAnswer: string): void {
 async function playerGuesses(guess: string): Promise<void> {
     await wrapper.find("[data-role=guess]").setValue(guess)
     await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+}
+
+function getWhatPlayerInputShows(): string {
+    return wrapper.find<HTMLInputElement>("[data-role=guess]").element.value
 }
 
 function assertPlayerHasWon() {
