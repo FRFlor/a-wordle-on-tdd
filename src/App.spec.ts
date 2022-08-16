@@ -112,6 +112,12 @@ describe("Wordle", () => {
 
             expect(document.activeElement).toBe(wrapper.find("[data-role=guess]").element)
         })
+
+        it("clears the input after each attempt", async () => {
+            await playerGuesses("WRONG")
+
+            expect(wrapper.find<HTMLInputElement>("[data-role=guess]").element.value).toEqual("")
+        })
     })
 
     describe("displaying hints", () => {

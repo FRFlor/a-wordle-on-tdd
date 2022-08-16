@@ -9,6 +9,7 @@ const emit = defineEmits(["guessGiven"])
 function submitAnswerIfWordExists() {
   if (SETTINGS.allowedWords.includes(guess.value)) {
     emit("guessGiven", guess.value)
+    guess.value = ""
   }
 }
 
