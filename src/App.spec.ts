@@ -155,8 +155,8 @@ describe("Wordle", () => {
 
             const guess = "GREAT"
 
-            for (let numberOfCharactersTyped = 0; numberOfCharactersTyped < guess.length; numberOfCharactersTyped++) {
-                const inProgressGuess = guess.slice(0, numberOfCharactersTyped)
+            for (let countOfCharacters = 0; countOfCharacters < guess.length; countOfCharacters++) {
+                const inProgressGuess = guess.slice(0, countOfCharacters)
                 await playerGuesses(inProgressGuess)
 
                 expect(guessView.findAll("[data-role=letter]")).toHaveLength(SETTINGS.wordSize)
