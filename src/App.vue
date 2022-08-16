@@ -67,4 +67,9 @@ ul {
   background-color: hsl(120, 40%, 65%);
   color: hsl(0, 0%, 95%);
 }
+
+.incorrect {
+  background-color: hsl(120, 0%, 65%);
+  color: hsl(0, 0%, 95%);
+}
 </style>
