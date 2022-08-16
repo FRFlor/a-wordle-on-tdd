@@ -183,8 +183,8 @@ describe("Wordle", () => {
         it("does not render results from guesses before an answer is submitted", async () => {
             const guess = "GREAT"
 
-            for (let numberOfCharactersTyped = 0; numberOfCharactersTyped < guess.length - 1; numberOfCharactersTyped++) {
-                const inProgressGuess = guess.slice(0, numberOfCharactersTyped)
+            for (let countOfCharacters = 0; countOfCharacters < guess.length - 1; countOfCharacters++) {
+                const inProgressGuess = guess.slice(0, countOfCharacters)
                 await playerGuesses(inProgressGuess)
 
                 expect(wrapper.find(".correct").exists()).toBe(false)
