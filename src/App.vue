@@ -20,7 +20,6 @@ const props = defineProps({
 })
 
 const gameState = ref<GameState>(GameState.InProgress)
-
 const pastGuesses = ref<string[]>(Array.from({length: SETTINGS.numberOfAttemptsAllowed}, () => ""))
 const guessInProgress = ref<string>("")
 const numberOfAttempts = ref<number>(0)
