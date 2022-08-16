@@ -45,7 +45,7 @@ function evaluateGuess() {
 </script>
 
 <template>
-  <h1>Worlde</h1>
+  <h1>Wordle</h1>
   <p class="on-tdd">on TDD</p>
 
   <guess-view v-for="(pastGuess, index) in pastGuesses"
