@@ -62,6 +62,11 @@ $incorrectColour: hsl(120, 0%, 65%);
 $correctColour: hsl(120, 40%, 65%);
 $almostColour: hsl(41, 100%, 48%);
 
+body {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
 
 ul {
   list-style: none;
@@ -70,8 +75,8 @@ ul {
 
 [data-role=guess-view] {
   display: flex;
-  margin: 0.4rem 0;
-  gap: 0.2rem;
+  margin: 0.6rem 0;
+  gap: 0.3rem;
 }
 
 [data-role=letter] {
