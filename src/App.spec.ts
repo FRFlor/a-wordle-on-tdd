@@ -118,6 +118,14 @@ describe("Wordle", () => {
 
             expect(getWhatPlayerInputShows()).toEqual("")
         })
+
+        it("Only allow letters to be provided", async () => {
+            // Act: Have the player type something with number and spaces
+            await playerGuesses("1A B!")
+
+            // Assert: Notice that only the letters remained in the attempt
+            expect(getWhatPlayerInputShows()).toEqual("AB")
+        })
     })
 
     describe("displaying hints", () => {

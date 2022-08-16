@@ -23,7 +23,7 @@ onMounted(() => {
          ref="input"
          data-role="guess"
          type="text"
-         @input="guess = guess.slice(0, SETTINGS.wordSize).toUpperCase()"
+         @input="guess = guess.replaceAll(/[^a-z]/gi, '').slice(0, SETTINGS.wordSize).toUpperCase()"
          @blur="input.focus()"
          @keydown.enter="submitAnswerIfWordExists">
 </template>
