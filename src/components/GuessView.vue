@@ -33,7 +33,7 @@ function getHintClassForLetter(letter: string, letterPosition: number): string {
 </script>
 
 <template>
-  <ul data-role="past-guess">
+  <ul data-role="guess-view">
     <li v-for="(letter, letterPosition) in props.guess"
         :key="letterPosition"
         :class="getHintClassForLetter(letter, letterPosition)"

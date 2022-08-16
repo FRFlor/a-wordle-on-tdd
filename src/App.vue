@@ -62,7 +62,7 @@ ul {
   padding: 0;
 }
 
-[data-role=past-guess] {
+[data-role=guess-view] {
   display: flex;
   margin: 0.4rem 0;
   gap: 0.2rem;

@@ -128,9 +128,9 @@ describe("Wordle", () => {
 
     describe("displaying hints", () => {
         it("renders all allowed attempts as empty blocks since the start", async () => {
-            expect(wrapper.findAll("[data-role=past-guess]")).toHaveLength(SETTINGS.numberOfAttemptsAllowed)
+            expect(wrapper.findAll("[data-role=guess-view]")).toHaveLength(SETTINGS.numberOfAttemptsAllowed)
 
-            wrapper.findAll("[data-role=past-guess]").forEach((pastGuess) => {
+            wrapper.findAll("[data-role=guess-view]").forEach((pastGuess) => {
                     expect(pastGuess.findAll("[data-role=letter]")).toHaveLength(SETTINGS.wordSize)
                 }
             )
@@ -143,7 +143,7 @@ describe("Wordle", () => {
                 await playerGuesses(guess)
             }
 
-            const pastGuesses = wrapper.findAll("[data-role=past-guess]")
+            const pastGuesses = wrapper.findAll("[data-role=guess-view]")
 
             expect(pastGuesses).toHaveLength(SETTINGS.numberOfAttemptsAllowed)
 
@@ -164,7 +164,7 @@ describe("Wordle", () => {
 
             await playerGuesses("WORLD")
 
-            const pastGuess = wrapper.find("[data-role=past-guess]")
+            const pastGuess = wrapper.find("[data-role=guess-view]")
             expect(pastGuess.find("[data-letter=W]").classes("correct")).toBe(true)
             expect(pastGuess.find("[data-letter=O]").classes("correct")).toBe(true)
             expect(pastGuess.find("[data-letter=R]").classes("correct")).toBe(true)
@@ -178,7 +178,7 @@ describe("Wordle", () => {
 
             await playerGuesses("WORLD")
 
-            const pastGuess = wrapper.find("[data-role=past-guess]")
+            const pastGuess = wrapper.find("[data-role=guess-view]")
             expect(pastGuess.find("[data-letter=W]").classes("incorrect")).toBe(false)
             expect(pastGuess.find("[data-letter=O]").classes("incorrect")).toBe(false)
             expect(pastGuess.find("[data-letter=R]").classes("incorrect")).toBe(false)
@@ -194,7 +194,7 @@ describe("Wordle", () => {
 
                 await playerGuesses("WORLD")
 
-                const pastGuess = wrapper.find("[data-role=past-guess]")
+                const pastGuess = wrapper.find("[data-role=guess-view]")
                 expect(pastGuess.find("[data-letter=W]").classes("almost")).toBe(false)
                 expect(pastGuess.find("[data-letter=O]").classes("almost")).toBe(false)
                 expect(pastGuess.find("[data-letter=R]").classes("almost")).toBe(false)
