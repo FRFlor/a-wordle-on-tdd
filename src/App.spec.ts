@@ -143,7 +143,20 @@ describe("Wordle", () => {
             expect(pastGuess.find("[data-letter=D]").classes("incorrect")).toBe(false)
         })
 
-        it.todo("marks letters that exist in the word but are not in the proper location with the 'almost' class")
+        it("marks letters that exist in the word but are not in the right location with the 'almost' class",
+            async () => {
+                mountApp("WORDS")
+
+                await playerGuesses("WORLD")
+
+                const pastGuess = wrapper.find("[data-role=past-guess]")
+                expect(pastGuess.find("[data-letter=W]").classes("almost")).toBe(false)
+                expect(pastGuess.find("[data-letter=O]").classes("almost")).toBe(false)
+                expect(pastGuess.find("[data-letter=R]").classes("almost")).toBe(false)
+                expect(pastGuess.find("[data-letter=L]").classes("almost")).toBe(false)
+
+                expect(pastGuess.find("[data-letter=D]").classes("almost")).toBe(true)
+            })
     })
 })
 

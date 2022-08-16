@@ -38,6 +38,7 @@ function evaluateGuess(guess: string) {
         :class="{
           'correct': letter === rightAnswer[index],
           'incorrect': letter !== rightAnswer[index] && !rightAnswer.includes(letter),
+          'almost': letter !== rightAnswer[index] && rightAnswer.includes(letter)
         }"
         :data-letter="letter">{{ letter }}
     </li>
