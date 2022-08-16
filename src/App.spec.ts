@@ -4,6 +4,12 @@ import App from "@/App.vue"
 const rightAnswer = "TESTS"
 
 let wrapper: VueWrapper
+
+async function playerGuesses(guess: string) {
+    await wrapper.find("[data-role=guess]").setValue(guess)
+    await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+}
+
 describe("Wordle", () => {
     beforeEach(() => {
         mountApp(rightAnswer)
@@ -60,8 +66,7 @@ describe("Wordle", () => {
         })
 
         it("displays a victory message when the player guesses the right word correctly", async () => {
-            await wrapper.find("[data-role=guess]").setValue(rightAnswer)
-            await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+            await playerGuesses(rightAnswer)
 
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
             expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
