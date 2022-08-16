@@ -13,6 +13,10 @@ const props = defineProps({
 })
 
 function getHintClassForLetter(letter: string, letterPosition: number): string {
+  if (letter === " ") {
+    return ""
+  }
+
   const expectedLetter = props.rightAnswer[letterPosition]
 
   if (letter === expectedLetter) {
@@ -33,6 +37,7 @@ function getHintClassForLetter(letter: string, letterPosition: number): string {
     <li v-for="(letter, letterPosition) in props.guess"
         :key="letterPosition"
         :class="getHintClassForLetter(letter, letterPosition)"
+        data-role="letter"
         :data-letter="letter">
       {{ letter }}
     </li>

@@ -20,13 +20,17 @@ const props = defineProps({
 })
 
 const gameState = ref<GameState>(GameState.InProgress)
-const pastGuess = ref<string>("")
+
+function initializePastGuesses(): string[] {
+  return Array.from({length: SETTINGS.numberOfAttemptsAllowed}, () => " ".repeat(SETTINGS.wordSize))
+}
+
+const pastGuesses = ref<string[]>(initializePastGuesses())
 const numberOfAttempts = ref<number>(0)
 
 function evaluateGuess(guess: string) {
+  pastGuesses.value[numberOfAttempts.value] = guess
   numberOfAttempts.value++
-
-  pastGuess.value = guess
 
   if (guess === props.rightAnswer) {
     gameState.value = GameState.Won
@@ -41,7 +45,10 @@ function evaluateGuess(guess: string) {
 </script>
 
 <template>
-  <guess-view :guess="pastGuess" :right-answer="props.rightAnswer"/>
+  <guess-view v-for="(pastGuess, index) in pastGuesses"
+              :key="index"
+              :guess="pastGuess"
+              :right-answer="props.rightAnswer"/>
 
   <guess-input @guess-given="evaluateGuess"/>
 
