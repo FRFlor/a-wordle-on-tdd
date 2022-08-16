@@ -63,11 +63,19 @@ ul {
 }
 
 [data-role=past-guess] {
-  display: flex
+  display: flex;
+  margin: 0.4rem 0;
+  gap: 0.2rem;
 }
 
-[data-role=past-guess] li {
-  font-size: 2rem;
+[data-role=letter] {
+  background-color: white;
+  border: 1px solid hsl(0, 0%, 30%);
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .correct {
