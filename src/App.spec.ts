@@ -81,7 +81,7 @@ describe("Wordle", () => {
 
             await playerGuesses("ACTORS")
 
-            expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
+            assertPlayerHasWon()
         })
 
         it("does not allow guesses that aren't real words", async () => {
@@ -93,7 +93,7 @@ describe("Wordle", () => {
         test("guesses are not case sensitive", async () => {
             await playerGuesses(rightAnswer.toLowerCase())
 
-            expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
+            assertPlayerHasWon()
         })
 
         it("starts with focus", async () => {
@@ -132,4 +132,8 @@ function mountApp(rightAnswer: string): void {
 async function playerGuesses(guess: string): Promise<void> {
     await wrapper.find("[data-role=guess]").setValue(guess)
     await wrapper.find("[data-role=guess]").trigger("keydown.enter")
+}
+
+function assertPlayerHasWon() {
+    expect(wrapper.find("[data-role=winning-message]").exists()).toBe(true)
 }
