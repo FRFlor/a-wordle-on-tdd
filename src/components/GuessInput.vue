@@ -13,6 +13,17 @@ function submitAnswerIfWordExists() {
   }
 }
 
+function sanitizeInput() {
+  const rawInput = guess.value.toUpperCase()
+
+  const onlyAllowLetters = (word: string) => word.replaceAll(/[^a-z]/gi, "")
+  const inputWithJustLetters = onlyAllowLetters(rawInput)
+
+  const limitLength = (word: string) => word.slice(0, SETTINGS.wordSize)
+
+  guess.value = limitLength(inputWithJustLetters)
+}
+
 onMounted(() => {
   input.value?.focus()
 })
@@ -23,7 +34,7 @@ onMounted(() => {
          ref="input"
          data-role="guess"
          type="text"
-         @input="guess = guess.replaceAll(/[^a-z]/gi, '').slice(0, SETTINGS.wordSize).toUpperCase()"
+         @input="sanitizeInput"
          @blur="input.focus()"
          @keydown.enter="submitAnswerIfWordExists">
 </template>
