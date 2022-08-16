@@ -18,7 +18,7 @@ const props = defineProps({
 })
 
 const lettersToRender = computed(() => {
-  return props.guess.trim().length === 0 ? " ".repeat(SETTINGS.wordSize) : props.guess
+  return props.guess.trim().padEnd(SETTINGS.wordSize, " ")
 })
 
 function getHintClassForLetter(letter: string, letterPosition: number): string {

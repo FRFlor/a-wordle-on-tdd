@@ -150,6 +150,19 @@ describe("Wordle", () => {
             )
         })
 
+        it("keeps the number of letter blocks consistent as the user types a new guess", async () => {
+            const guessView = wrapper.find("[data-role=guess-view]")
+
+            const guess = "GREAT"
+
+            for (let numberOfCharactersTyped = 0; numberOfCharactersTyped < guess.length; numberOfCharactersTyped++) {
+                const inProgressGuess = guess.slice(0, numberOfCharactersTyped)
+                await playerGuesses(inProgressGuess)
+
+                expect(guessView.findAll("[data-role=letter]")).toHaveLength(SETTINGS.wordSize)
+            }
+        })
+
         it("displays all previous guesses", async () => {
             const guesses = ["TRIAL", "TEMPO", "GREAT", "WRONG", "BYTES", "TESTS"]
 
