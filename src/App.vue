@@ -20,13 +20,21 @@ const props = defineProps({
 
 const gameState = ref<GameState>(GameState.InProgress)
 const pastGuess = ref<string>("")
+const numberOfAttempts = ref<number>(0)
 
 function evaluateGuess(guess: string) {
+  numberOfAttempts.value++
+
   pastGuess.value = guess
 
-  gameState.value = guess === props.rightAnswer
-      ? GameState.Won
-      : GameState.Lost
+  if (guess === props.rightAnswer) {
+    gameState.value = GameState.Won
+    return
+  }
+
+  if (numberOfAttempts.value === 6) {
+    gameState.value = GameState.Lost
+  }
 }
 
 </script>

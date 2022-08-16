@@ -67,11 +67,21 @@ describe("Wordle", () => {
             expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
         })
 
-        it("displays a failure message when the player guesses wrong", async () => {
+        it("only fails the game if the player has guessed wrong 6 times in a roll", async () => {
+            // Act: Fail 5 times
+            for (let i = 0; i < 5; i++) {
+                await playerGuesses("WRONG")
+            }
+
+            // Assert: Make sure we haven't lost the game yet
+            expect(wrapper.find("[data-role=losing-message]").exists()).toBe(false)
+
+            // Act: Fail another time
             await playerGuesses("WRONG")
 
-            expect(wrapper.find("[data-role=losing-message]").exists()).toBe(true)
+            // Assert: Make sure we have lost the game
             expect(wrapper.find("[data-role=winning-message]").exists()).toBe(false)
+            expect(wrapper.find("[data-role=losing-message]").exists()).toBe(true)
         })
     })
 
