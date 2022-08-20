@@ -1,29 +1,9 @@
-# wordle
+## A Wordle On TDD
 
-## Project setup
-```
-yarn install
-```
+This project was done for my talk on Test Driven Development.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## How to run it
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* Install dependencies: `yarn`
+* Serve the application: `yarn serve`
+* Run the tests: `yarn test`
