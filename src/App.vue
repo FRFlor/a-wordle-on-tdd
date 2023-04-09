@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import {defineProps, ref} from "vue"
 import {SETTINGS} from "@/settings"
 import GuessInput from "@/components/GuessInput.vue"
 import GuessView from "@/components/GuessView.vue"
+import {ref} from "vue"
 
 enum GameState {
   InProgress = "In-Progress",

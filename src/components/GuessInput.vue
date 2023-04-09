@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import {defineEmits, onMounted, ref} from "vue"
 import {SETTINGS} from "@/settings"
+import {onMounted, ref} from "vue"
 
 const guess = ref<string>("")
 const input = ref<HTMLInputElement>()
