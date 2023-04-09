@@ -1,6 +1,6 @@
-import {defineConfig} from "vite";
 import vuePlugin from "@vitejs/plugin-vue";
 import path from "path"
+import {defineConfig} from "vitest/config";
 
 export default defineConfig({
     plugins: [vuePlugin()],
@@ -9,4 +9,8 @@ export default defineConfig({
             "@": path.resolve(__dirname, "./src")
         }
     },
+    test: {
+        globals: true,
+        environment: "happy-dom"
+    }
 })

@@ -1,6 +1,7 @@
 import {mount, MountingOptions, VueWrapper} from "@vue/test-utils"
 import App from "@/App.vue"
 import {SETTINGS} from "@/settings"
+import {vi} from "vitest"
 
 const rightAnswer = "TESTS"
 
@@ -13,7 +14,7 @@ describe("Wordle", () => {
 
     describe("setting up the game", () => {
         it("accepts a 'rightAnswer' with 5 letters without giving any warnings", () => {
-            console.warn = jest.fn()
+            console.warn = vi.fn()
 
             mountApp(rightAnswer)
 
@@ -23,7 +24,7 @@ describe("Wordle", () => {
 
         it("provides a warning if the rightAnswer given does not have exactly 5 letters", () => {
             let hasWarnedAboutWordProp = false
-            console.warn = jest.fn().mockImplementation((vueWarning) => {
+            console.warn = vi.fn().mockImplementation((vueWarning) => {
                 hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
             })
 
@@ -34,7 +35,7 @@ describe("Wordle", () => {
 
         it("provides a warning if the rightAnswer given is not in allowed words", () => {
             let hasWarnedAboutWordProp = false
-            console.warn = jest.fn().mockImplementation((vueWarning) => {
+            console.warn = vi.fn().mockImplementation((vueWarning) => {
                 hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
             })
 
@@ -45,7 +46,7 @@ describe("Wordle", () => {
 
         it("provides a warning if the rightAnswer given is not in uppercase", () => {
             let hasWarnedAboutWordProp = false
-            console.warn = jest.fn().mockImplementation((vueWarning) => {
+            console.warn = vi.fn().mockImplementation((vueWarning) => {
                 hasWarnedAboutWordProp = /invalid.*prop.*rightAnswer/ig.test(vueWarning)
             })
 
